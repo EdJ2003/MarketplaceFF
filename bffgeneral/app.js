@@ -2,11 +2,19 @@ const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const axiosRetry = require('axios-retry');
 const app = express();
 
-// Configura axios para reintentar las solicitudes en caso de error
-axiosRetry(axios, { retries: 3 });
+const axiosRetry = async (url, retries = 3, delay = 1000) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await axios.get(url);
+    } catch (error) {
+      if (i === retries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+};
+
 
 app.use(cors({
   origin: 'http://localhost:3000'
@@ -14,10 +22,10 @@ app.use(cors({
 
 app.get('/pokemon-species', async (req, res) => {
   try {
-    const species = await axios.get('https://pokeapi.co/api/v2/pokemon-species/?limit=100');
+    const species = await axiosRetry('https://pokeapi.co/api/v2/pokemon-species/?limit=100');
     res.send(species.data);
   } catch (error) {
-    res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
+    res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
   }
 });
 
