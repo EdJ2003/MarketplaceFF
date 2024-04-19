@@ -5,7 +5,7 @@ import Inventory from './Inventory';
 import Sales from './Sales';
 import Container from '@mui/material/Container';
 
-class App extends React.Component {
+class App1 extends React.Component {
   state = {
     products: [],
     sales: []
@@ -33,4 +33,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App1;

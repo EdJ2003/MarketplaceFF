@@ -4,7 +4,7 @@ import ProductList from './ProductList';
 import ShoppingCart from './ShoppingCart';
 import Container from '@mui/material/Container';
 
-class App extends React.Component {
+class App2 extends React.Component {
   state = {
     products: [],
     cart: []
@@ -31,4 +31,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App2;

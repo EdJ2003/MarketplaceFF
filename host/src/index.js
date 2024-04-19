@@ -1,17 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { registerApplication, start } from 'single-spa';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+registerApplication({
+    name: 'app1',
+    app: () => import('http://localhost:3001'),
+    activeWhen: '/app1',
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+registerApplication({
+    name: 'app2',
+    app: () => import('http://localhost:3002'),
+    activeWhen: '/app2',
+});
+
+start();
