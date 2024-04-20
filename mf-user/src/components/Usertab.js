@@ -9,8 +9,8 @@ import Register from "./Register";
 import Login from "./login";
 
 function AdminTab(props) {
-    const { children, value, index, ...other } = props;
 
+    const { children, value, index, ...other } = props;
     return (
         <div
             role="tabpanel"
@@ -41,30 +41,31 @@ function a11yProps(index) {
     };
 }
 
+
 export default function BasicTabs() {
     const [value, setValue] = React.useState(0);
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
 
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Ver perfil" {...a11yProps(0)} />
-                    <Tab label="Registrarse" {...a11yProps(1)} />
-                    <Tab label="Login" {...a11yProps(2)} />
+                    <Tab label="Login" {...a11yProps(0)} />
+                    <Tab label="Ver perfil" {...a11yProps(1)} />
+                    <Tab label="Registrarse" {...a11yProps(2)} />
+
                 </Tabs>
             </Box>
-            <AdminTab value={value} index={0}>
+            <AdminTab value={value} index={1}>
                 <UserProfile />
             </AdminTab>
-            <AdminTab value={value} index={1}>
+            <AdminTab value={value} index={2}>
                 <Register/>
             </AdminTab>
-
-            <AdminTab value={value} index={2}>
+            <AdminTab value={value} index={0}>
                 <Login/>
             </AdminTab>
 

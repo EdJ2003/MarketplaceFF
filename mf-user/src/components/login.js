@@ -11,33 +11,15 @@ import Typography from "@mui/material/Typography";
 
 const defaultTheme = createTheme();
 
-export default function Login() {
+export default function Login({ onLogin }) {
     const [username,setUsername] =useState('') ;
     const [password,setPassword] =useState ('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleLogin = async () => {
-        const response = await fetch('/transacciones', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                //'Authorization': 'Basic ' + btoa(`${username}:${password}`),
-            },
-            credentials: 'include', // This will include the cookie in every future request
-        });
 
-        if (response.ok) {
-            // If the login was successful, set isLoggedIn to true
-            setIsLoggedIn(true);
-        } else {
-            // Handle login failure
-            console.error('Login failed');
-        }
     };
 
-    if (isLoggedIn) {
-    } else {
-        return (
+    return (
             <ThemeProvider theme={defaultTheme}>
 
                 <Grid container component="main" sx={{ height: '100vh' }}>
@@ -95,5 +77,5 @@ export default function Login() {
                 </Grid>
             </ThemeProvider>
         );
-    }
+
 }

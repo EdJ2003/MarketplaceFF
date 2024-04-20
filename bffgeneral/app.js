@@ -50,14 +50,6 @@ app.post('/user/add', async (req, res) => {
   }
 });
 
-app.get('/move/:id', async (req, res) => {
-  try {
-    const move = await axios.get(`https://pokeapi.co/api/v2/move/${req.params.id}`);
-    res.send(move.data);
-  } catch (error) {
-    res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
-  }
-});
 
 
 module.exports = app;
