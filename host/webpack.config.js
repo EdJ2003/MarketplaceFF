@@ -45,7 +45,7 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         'Products' : 'mf_general@http://localhost:3002/remoteEntry.js',
-        'UserProfile' : 'mf_user@http://localhost:3003/remoteEntry.js',
+        'Usertab' : 'mf_user@http://localhost:3003/remoteEntry.js',
         'Admintab' : 'mf_admin@http://localhost:3001/remoteEntry.js',
       },
       exposes: {},

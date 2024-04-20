@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
-import UserProfile from "./components/UserProfile";
+import Usertab from "./components/Usertab";
 
 const App = () => (
-  <UserProfile/>
+  <Usertab/>
 );
 ReactDOM.render(<App />, document.getElementById("app"));

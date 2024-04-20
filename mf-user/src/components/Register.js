@@ -6,53 +6,66 @@ import Button from '@mui/material/Button';
 import {useState} from "react";
 import {Alert} from "@mui/material";
 
-export default function AddProduct() {
+export default function Register() {
+    const [email,setemail]=useState('')
+    const [password,setPassword]=useState('')
     const [name,setName]=useState('')
-    const [price,setPrice]=useState('')
-    const [stock,setStock]=useState('')
+    const [address,setAddress]=useState('')
+    const [phone,setPhone]=useState('')
     const [alertaMensaje, setAlertaMensaje] = useState(null);
     const [error, setError] = useState(false);
     const [alertaRespuesta, setAlertaRespuesta]=useState('');
 
+
+    const handleEmailChange = (event) => {
+        const value = event.target.value;
+        setError(false);
+        setemail(value);
+
+    };
     const handleNombreChange = (event) => {
         const value = event.target.value;
         setError(false);
         setName(value);
 
     };
-    const handlePriceChange = (event) => {
+    const handlePasswordChange = (event) => {
         const value = event.target.value;
         setError(false);
         if (value >= 0) {
-            setPrice(value)
+            setPassword(value)
         }
 
     };
-    const handleStockChange = (event) => {
+    const handleAddressChange = (event) => {
         const value = event.target.value;
         setError(false);
-        if (value >= 0) {
-            setStock(value)
-        }
+        setAddress(value)
+    }
+        const handlePhoneChange = (event) => {
+            const value = event.target.value;
+            setError(false);
+            setPhone(value)
+
 
     };
     const tenerClick = (e) => {
         e.preventDefault();
-        if (!name || !price || !stock) {
+        if (!name || !email || !phone) {
             setAlertaMensaje('Debes llenar todos los campos requeridos');
             setAlertaRespuesta('error');
             setError(true);
             return;
         }
 
-        const product = { name, price: parseFloat(price), stock: parseInt(stock, 10) };
+        const user = { email, name, password,address,phone: parseInt(phone, 10) };
 
-        fetch("https://localhost:8081/product/add", {
+        fetch("https://localhost:8081/user/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(product)
+            body: JSON.stringify(user)
         }).then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -87,30 +100,30 @@ export default function AddProduct() {
             noValidate
             autoComplete="off"
         >
-            <TextField id="nombre" label="Nombre del Producto" variant="outlined"
+            <TextField id="email" label="Email" variant="outlined"
+                       value={email}
+                       error={error}
+                       onChange={handleEmailChange}/>
+            <TextField id="Password" label="Password" variant="outlined"
+                       value={password}
+                       error={error}
+                       onChange={handlePasswordChange}/>
+
+            <TextField id="name" label="name" variant="outlined"
                        value={name}
                        error={error}
                        onChange={handleNombreChange}/>
-            <TextField id="price" label="Precio" variant="outlined"
-                       value={price}
+
+            <TextField id="address" label="Dirección" variant="outlined"
+                       value={address}
                        error={error}
-                       type="number"
-                       InputProps={{
-                           inputProps: {
-                               min: 0
-                           }
-                       }}
-                       onChange={handlePriceChange}/>
-            <TextField id="stock" label="Cantidad" variant="outlined"
-                       value={stock}
+                       onChange={handleAddressChange}/>
+
+            <TextField id="phone" label="Telefono" variant="outlined"
+                       value={phone}
                        error={error}
-                       type="number"
-                       InputProps={{
-                           inputProps: {
-                               min: 0
-                           }
-                       }}
-                       onChange={handleStockChange}/>
+                       onChange={handlePhoneChange}/>
+
 
             <Stack spacing={2} direction="row">
                 <Button variant="contained" onClick={tenerClick}>Agregar</Button>

@@ -21,8 +21,8 @@ export default function Sales() {
     }, []);
 
     const columns = [
-        { field: 'nombreBeneficio', headerName: 'Nombre del Beneficio', width: 200 },
-        { field: 'puntosRequeridos', headerName: 'Puntos Requeridos', width: 200 },
+        { field: 'sale', headerName: 'Venta', width: 200 },
+        { field: 'value', headerName: 'Valor total de la venta', width: 200 },
         { field: 'codigo', headerName: 'Código', width: 200 },
     ];
 

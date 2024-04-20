@@ -17,7 +17,7 @@ import { mainListItems} from './listItems';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {useState} from "react";
 import Products from 'Products/Products';
-import UserProfile from 'UserProfile/UserProfile';
+import Usertab from 'Usertab/Usertab';
 import Admintab from 'Admintab/Admintab';
 const drawerWidth = 240;
 
@@ -164,7 +164,7 @@ export default function Dashboard() {
           <Container maxWidth="false" sx={{ mt: 2, mb: 2 }}>
             <Routes>
               <Route path="/productos" element={<Products />} />
-              <Route path="/profile" element={<UserProfile />} />
+              <Route path="/profile" element={<Usertab />} />
               <Route path="/admin" element={<Admintab />} />
             </Routes>
           </Container>

@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const app = express();
+app.use(express.json());
 
 const axiosRetry = async (url, retries = 3, delay = 1000) => {
   for (let i = 0; i < retries; i++) {
@@ -20,30 +21,32 @@ app.use(cors({
   origin: 'http://localhost:3000'
 }));
 
-app.get('/pokemon-species', async (req, res) => {
+app.get('/products', async (req, res) => {
   try {
-    const species = await axiosRetry('https://pokeapi.co/api/v2/pokemon-species/?limit=100');
+    const species = await axiosRetry('http://localhost:8080/products');
     res.send(species.data);
   } catch (error) {
     res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
   }
 });
 
-app.get('/pokemon-species/:id', async (req, res) => {
+app.post('/product/add', async (req, res) => {
   try {
-    const species = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${req.params.id}`);
-    res.send(species.data);
+    const dataToSend = req.body;
+    const response = await axios.post('http://localhost:8080/product/add', dataToSend);
+    res.send(response.data);
   } catch (error) {
-    res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
+    res.status(500).send({ error: 'An error occurred while adding a product' });
   }
 });
 
-app.get('/move', async (req, res) => {
+app.post('/user/add', async (req, res) => {
   try {
-    const move = await axios.get(`https://pokeapi.co/api/v2/move/?limit=100`);
-    res.send(move.data);
+    const dataToSend = req.body;
+    const response = await axios.post('http://localhost:8080/user/add', dataToSend);
+    res.send(response.data);
   } catch (error) {
-    res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
+    res.status(500).send({ error: 'An error occurred while adding a product' });
   }
 });
 
@@ -56,22 +59,5 @@ app.get('/move/:id', async (req, res) => {
   }
 });
 
-app.get('/berry', async (req, res) => {
-  try {
-    const evolutionChain = await axios.get(`https://pokeapi.co/api/v2/berry/?limit=100`);
-    res.send(evolutionChain.data);
-  } catch (error) {
-    res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
-  }
-});
-
-app.get('/berry/:id', async (req, res) => {
-  try {
-    const evolutionChain = await axios.get(`https://pokeapi.co/api/v2/berry/${req.params.id}`);
-    res.send(evolutionChain.data);
-  } catch (error) {
-    res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
-  }
-});
 
 module.exports = app;
