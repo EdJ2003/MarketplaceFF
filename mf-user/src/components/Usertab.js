@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -10,6 +11,7 @@ import Login from "./login";
 
 function AdminTab(props) {
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const { children, value, index, ...other } = props;
     return (
         <div
@@ -44,6 +46,8 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
     const [value, setValue] = React.useState(0);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false); // Agrega esta línea
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -54,7 +58,7 @@ export default function BasicTabs() {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Login" {...a11yProps(0)} />
-                    <Tab label="Ver perfil" {...a11yProps(1)} />
+                    <Tab label="Ver perfil" {...a11yProps(1)} disabled={!isLoggedIn} />
                     <Tab label="Registrarse" {...a11yProps(2)} />
 
                 </Tabs>

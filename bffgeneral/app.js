@@ -23,7 +23,7 @@ app.use(cors({
 
 app.get('/products', async (req, res) => {
   try {
-    const species = await axiosRetry('http://localhost:8080/products');
+    const species = await axiosRetry('http://localhost:8082/products');
     res.send(species.data);
   } catch (error) {
     res.status(500).send({ error: 'An error occurred while fetching data from PokeAPI' });
@@ -33,7 +33,7 @@ app.get('/products', async (req, res) => {
 app.post('/product/add', async (req, res) => {
   try {
     const dataToSend = req.body;
-    const response = await axios.post('http://localhost:8080/product/add', dataToSend);
+    const response = await axios.post('http://localhost:8082/product/add', dataToSend);
     res.send(response.data);
   } catch (error) {
     res.status(500).send({ error: 'An error occurred while adding a product' });
@@ -43,7 +43,7 @@ app.post('/product/add', async (req, res) => {
 app.post('/user/add', async (req, res) => {
   try {
     const dataToSend = req.body;
-    const response = await axios.post('http://localhost:8080/user/add', dataToSend);
+    const response = await axios.post('http://localhost:8082/register', dataToSend);
     res.send(response.data);
   } catch (error) {
     res.status(500).send({ error: 'An error occurred while adding a product' });
@@ -51,5 +51,14 @@ app.post('/user/add', async (req, res) => {
 });
 
 
+app.post('/login', async (req, res) => {
+  try {
+    const dataToSend = req.body;
+    const response = await axios.post('http://localhost:8082/login', dataToSend);
+    res.send(response.data);
+  } catch (error) {
+    res.status(500).send({ error: 'An error occurred while adding a product' });
+  }
+});
 
 module.exports = app;
