@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 export default function Products() {
+    const tenerClick = (e) => {
+
+    };
     const [productsData, setProductsData] = useState([]);
 
     useEffect(() => {
@@ -36,6 +40,10 @@ export default function Products() {
                 checkboxSelection
                 getRowId={(row) => row.id}
             />
+            <Stack spacing={2} direction="row">
+                <Button variant="contained" onClick={tenerClick}>Comprar</Button>
+            </Stack>
+
         </div>
     );
 }
