@@ -46,7 +46,7 @@ app.post('/user/add', async (req, res) => {
     const response = await axios.post('http://localhost:8082/register', dataToSend);
     res.send(response.data);
   } catch (error) {
-    res.status(500).send({ error: 'An error occurred while adding a product' });
+    res.status(500).send({ error: 'An error occurred while adding a produc' });
   }
 });
 
