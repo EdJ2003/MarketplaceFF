@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import UserProfile from "./UserProfile";
 import Register from "./Register";
+import Login from "./login";
 
 function AdminTab(props) {
     const { children, value, index, ...other } = props;
@@ -53,6 +54,7 @@ export default function BasicTabs() {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Ver perfil" {...a11yProps(0)} />
                     <Tab label="Registrarse" {...a11yProps(1)} />
+                    <Tab label="Login" {...a11yProps(2)} />
                 </Tabs>
             </Box>
             <AdminTab value={value} index={0}>
@@ -61,6 +63,11 @@ export default function BasicTabs() {
             <AdminTab value={value} index={1}>
                 <Register/>
             </AdminTab>
+
+            <AdminTab value={value} index={2}>
+                <Login/>
+            </AdminTab>
+
         </Box>
     );
 }

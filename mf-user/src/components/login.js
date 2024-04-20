@@ -3,13 +3,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useState} from "react";
-import Dashboard from '../homepage/Dashboard';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from "@mui/material/CssBaseline";
 import {Avatar, Grid, Paper} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import backgroundImage from "../imagenes/image.jpg"
 
 const defaultTheme = createTheme();
 
@@ -23,7 +21,7 @@ export default function Login() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+                //'Authorization': 'Basic ' + btoa(`${username}:${password}`),
             },
             credentials: 'include', // This will include the cookie in every future request
         });
@@ -38,7 +36,6 @@ export default function Login() {
     };
 
     if (isLoggedIn) {
-        return <Dashboard />;
     } else {
         return (
             <ThemeProvider theme={defaultTheme}>
@@ -51,7 +48,7 @@ export default function Login() {
                         sm={4}
                         md={7}
                         sx={{
-                            backgroundImage: `url(${backgroundImage})`,
+
                             backgroundRepeat: 'no-repeat',
                             backgroundColor: (t) =>
                                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
